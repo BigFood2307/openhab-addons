@@ -4,6 +4,6 @@
 	xsi:schemaLocation="https://openhab.org/schemas/binding/v1.0.0 https://openhab.org/schemas/binding-1.0.0.xsd">
 
 	<name>LinkTap Binding</name>
-	<description>This is the binding for LinkTap.</description>
+	<description>This binding allows usage of the LinkTap smart watering devices via its Developer API.</description>
 
 </binding:binding>

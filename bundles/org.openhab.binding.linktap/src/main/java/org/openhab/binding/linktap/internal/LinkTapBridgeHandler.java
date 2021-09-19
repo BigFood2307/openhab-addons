@@ -12,8 +12,6 @@
  */
 package org.openhab.binding.linktap.internal;
 
-import static org.openhab.binding.linktap.internal.LinkTapBindingConstants.CHANNEL_1;
-
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
@@ -24,12 +22,11 @@ import org.eclipse.jetty.client.api.ContentResponse;
 import org.eclipse.jetty.client.api.Request;
 import org.eclipse.jetty.client.util.StringContentProvider;
 import org.eclipse.jetty.http.HttpMethod;
+import org.openhab.core.thing.Bridge;
 import org.openhab.core.thing.ChannelUID;
-import org.openhab.core.thing.Thing;
 import org.openhab.core.thing.ThingStatus;
-import org.openhab.core.thing.binding.BaseThingHandler;
+import org.openhab.core.thing.binding.BaseBridgeHandler;
 import org.openhab.core.types.Command;
-import org.openhab.core.types.RefreshType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,59 +35,42 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 /**
- * The {@link LinkTapHandler} is responsible for handling commands, which are
+ * The {@link LinkTapBridgeHandler} is responsible for handling commands, which are
  * sent to one of the channels.
  *
  * @author Lukas Pindl - Initial contribution
  */
 @NonNullByDefault
-public class LinkTapHandler extends BaseThingHandler {
+public class LinkTapBridgeHandler extends BaseBridgeHandler {
 
-    private final Logger logger = LoggerFactory.getLogger(LinkTapHandler.class);
+    private final Logger logger = LoggerFactory.getLogger(LinkTapBridgeHandler.class);
     private final HttpClient httpClient;
 
-    private @Nullable LinkTapConfiguration config;
+    private @Nullable LinkTapBridgeConfiguration config;
 
-    public LinkTapHandler(Thing thing, HttpClient httpClient) {
+    public LinkTapBridgeHandler(Bridge thing, HttpClient httpClient) {
         super(thing);
         this.httpClient = httpClient;
     }
 
     @Override
     public void handleCommand(ChannelUID channelUID, Command command) {
-        if (CHANNEL_1.equals(channelUID.getId())) {
-            if (command instanceof RefreshType) {
-                // TODO: handle data refresh
-            }
-
-            // TODO: handle command
-
-            // Note: if communication with thing fails for some reason,
-            // indicate that by setting the status with detail information:
-            // updateStatus(ThingStatus.OFFLINE, ThingStatusDetail.COMMUNICATION_ERROR,
-            // "Could not control device at IP address x.x.x.x");
-        }
+        // Not used in the Bridge
     }
 
     @Override
     public void initialize() {
-        config = getConfigAs(LinkTapConfiguration.class);
-
+        logger.debug("Initializing Bridge");
         updateStatus(ThingStatus.UNKNOWN);
 
         // Example for background initialization:
         scheduler.execute(() -> {
-            boolean thingReachable = true; // <background task with long running initialization here>
+            boolean thingReachable = false; // <background task with long running initialization here>
             // when done do:
-            Request httpReq = httpClient.newRequest("https://www.link-tap.com/api/getWateringStatus")
+            Request httpReq = httpClient.newRequest("https://www.link-tap.com/api/getAllDevices")
                     .method(HttpMethod.POST);
 
-            LinkTapBridgeHandler bridge = (LinkTapBridgeHandler) (getBridge().getHandler());
-
-            JsonObject dataObject = bridge.getAuthObject();
-
-            dataObject.addProperty("taplinkerId", config.tapId);
-
+            JsonObject dataObject = getAuthObject();
             String requestBodyPayload = dataObject.toString();
 
             httpReq = httpReq.content(new StringContentProvider(requestBodyPayload), "application/json");
@@ -136,5 +116,14 @@ public class LinkTapHandler extends BaseThingHandler {
         // Add a description to give user information to understand why thing does not work as expected. E.g.
         // updateStatus(ThingStatus.OFFLINE, ThingStatusDetail.CONFIGURATION_ERROR,
         // "Can not access device as username and/or password are invalid");
+    }
+
+    public JsonObject getAuthObject() {
+        config = getConfigAs(LinkTapBridgeConfiguration.class);
+        JsonObject dataObject = new JsonObject();
+        dataObject.addProperty("username", config.username);
+        dataObject.addProperty("apiKey", config.apikey);
+
+        return dataObject;
     }
 }

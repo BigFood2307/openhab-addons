@@ -13,16 +13,15 @@
 package org.openhab.binding.linktap.internal;
 
 /**
- * The {@link LinkTapConfiguration} class contains fields mapping thing configuration parameters.
+ * The {@link LinkTapBridgeConfiguration} class contains fields mapping thing configuration parameters.
  *
  * @author Lukas Pindl - Initial contribution
  */
-public class LinkTapConfiguration {
+public class LinkTapBridgeConfiguration {
 
     /**
      * Sample configuration parameters. Replace with your own.
      */
-    public String tapId;
-    public String gatewayId;
-    public int refreshInterval;
+    public String username;
+    public String apikey;
 }

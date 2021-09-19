@@ -27,7 +27,8 @@ public class LinkTapBindingConstants {
     private static final String BINDING_ID = "linktap";
 
     // List of all Thing Type UIDs
-    public static final ThingTypeUID THING_TYPE_SAMPLE = new ThingTypeUID(BINDING_ID, "sample");
+    public static final ThingTypeUID THING_TYPE_TAP = new ThingTypeUID(BINDING_ID, "tap");
+    public static final ThingTypeUID THING_TYPE_BRIDGE = new ThingTypeUID(BINDING_ID, "bridge");
 
     // List of all Channel ids
     public static final String CHANNEL_1 = "channel1";

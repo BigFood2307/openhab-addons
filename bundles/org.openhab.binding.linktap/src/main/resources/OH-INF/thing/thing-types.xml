@@ -4,31 +4,43 @@
 	xmlns:thing="https://openhab.org/schemas/thing-description/v1.0.0"
 	xsi:schemaLocation="https://openhab.org/schemas/thing-description/v1.0.0 https://openhab.org/schemas/thing-description-1.0.0.xsd">
 
-	<!-- Sample Thing Type -->
-	<thing-type id="sample">
-		<!-- Comment this in for Things which need a Bridge to function.
-			<supported-bridge-type-refs>
-			<bridge-type-ref id="LinkTapBridge" />
-			</supported-bridge-type-refs>
-		-->
+	<bridge-type id="bridge">
 
-		<label>LinkTap Binding Thing</label>
-		<description>Sample thing for LinkTap Binding</description>
+		<label>LinkTap API Bridge</label>
+		<description>A virtual Bridge to handle communication with the LinkTap API</description>
+
+		<config-description>
+			<parameter name="username" type="text" required="true">
+				<label>Username</label>
+				<description>Your LinkTap Username</description>
+			</parameter>
+			<parameter name="apikey" type="text" required="true">
+				<label>API-Key</label>
+				<description>Your LinkTap API-Key</description>
+			</parameter>
+		</config-description>
+	</bridge-type>
+
+	<thing-type id="tap">
+		<supported-bridge-type-refs>
+			<bridge-type-ref id="bridge"/>
+		</supported-bridge-type-refs>
+
+		<label>LinkTap Tap</label>
+		<description>A LinkTap smart watering tap</description>
 
 		<channels>
 			<channel id="channel1" typeId="sample-channel"/>
 		</channels>
 
 		<config-description>
-			<parameter name="hostname" type="text" required="true">
-				<context>network-address</context>
-				<label>Hostname</label>
-				<description>Hostname or IP address of the device</description>
+			<parameter name="tapId" type="text" required="true">
+				<label>Tap ID</label>
+				<description>The device ID for the LinkTap Tap</description>
 			</parameter>
-			<parameter name="password" type="text" required="true">
-				<context>password</context>
-				<label>Password</label>
-				<description>Passwort to access the device</description>
+			<parameter name="gatewayId" type="text" required="true">
+				<label>Gateway ID</label>
+				<description>The device ID for the Gateway, which the Tap is connected to</description>
 			</parameter>
 			<parameter name="refreshInterval" type="integer" unit="s" min="1">
 				<label>Refresh Interval</label>
