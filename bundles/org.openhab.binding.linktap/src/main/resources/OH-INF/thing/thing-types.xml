@@ -30,7 +30,16 @@
 		<description>A LinkTap smart watering tap</description>
 
 		<channels>
-			<channel id="channel1" typeId="sample-channel"/>
+			<channel id="mode" typeId="tap-mode"/>
+			<channel id="running" typeId="tap-running"/>
+			<channel id="on-duration" typeId="tap-on-duration"/>
+			<channel id="eco-mode" typeId="tap-eco-mode"/>
+			<channel id="eco-on" typeId="tap-eco-on"/>
+			<channel id="eco-off" typeId="tap-eco-off"/>
+			<channel id="auto-back" typeId="tap-auto-back"/>
+			<channel id="remaining-duration" typeId="tap-remaining-duration"/>
+			<channel id="total-time" typeId="tap-total-time"/>
+			<channel id="eco-total" typeId="tap-eco-total"/>
 		</channels>
 
 		<config-description>
@@ -50,9 +59,70 @@
 	</thing-type>
 
 	<!-- Sample Channel Type -->
-	<channel-type id="sample-channel">
-		<item-type>Number:Temperature</item-type>
-		<label>Example Temperature</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
-		<description>Sample channel for LinkTap Binding</description>
+	<channel-type id="tap-mode">
+		<item-type>String</item-type>
+		<label>LinkTap Mode</label>
+		<description>Describes which operational mode the LinkTap Device is currently in.</description>
+		<state>
+			<options>
+				<option value="TAP_MODE_INSTANT">Instant</option>
+				<option value="TAP_MODE_INTERVAL">Interval</option>
+				<option value="TAP_MODE_ODD_EVEN">Odd-Even</option>
+				<option value="TAP_MODE_SEVEN_DAY">Seven Day</option>
+				<option value="TAP_MODE_MONTH">Month</option>
+			</options>
+		</state>
+	</channel-type>
+	<channel-type id="tap-running">
+		<item-type>Switch</item-type>
+		<label>Running</label>
+		<description>Determines if the TapLink Device is active. On may also mean the device is in a special mode waiting to
+			turn on automatically.</description>
+	</channel-type>
+	<channel-type id="tap-on-duration">
+		<item-type>Number:Time</item-type>
+		<label>On Duration</label>
+		<description>The set duration for Instant Mode.</description>
+		<state pattern="%d %unit%" step="1" min="1"/>
+	</channel-type>
+	<channel-type id="tap-eco-mode">
+		<item-type>Switch</item-type>
+		<label>Eco Mode</label>
+		<description>Decides if the ECO Mode is used during Instant Mode.</description>
+	</channel-type>
+	<channel-type id="tap-eco-on">
+		<item-type>Number:Time</item-type>
+		<label>Eco On Duration</label>
+		<description>On duration during ECO Mode.</description>
+		<state pattern="%d %unit%" step="1" min="1"/>
+	</channel-type>
+	<channel-type id="tap-eco-off">
+		<item-type>Number:Time</item-type>
+		<label>Eco Off Duration</label>
+		<description>Off duration during ECO Mode.</description>
+		<state pattern="%d %unit%" step="1" min="1"/>
+	</channel-type>
+	<channel-type id="tap-auto-back">
+		<item-type>Switch</item-type>
+		<label>Auto Back Mode</label>
+		<description>Used for Instant watering mode. If On, the previous mode is activated after Instant mode is finished.</description>
+	</channel-type>
+	<channel-type id="tap-remaining-duration">
+		<item-type>Number:Time</item-type>
+		<label>Remaining Duration</label>
+		<description>The Remaining Time of the current watering slot.</description>
+		<state pattern="%d %unit%" readOnly="true"/>
+	</channel-type>
+	<channel-type id="tap-total-time">
+		<item-type>Number:Time</item-type>
+		<label>Total Time</label>
+		<description>The total watering duration of a watering slot.</description>
+		<state pattern="%d %unit%" readOnly="true"/>
+	</channel-type>
+	<channel-type id="tap-eco-total">
+		<item-type>Number:Time</item-type>
+		<label>Eco Total Time</label>
+		<description>The total watering duration of a watering plan when the ECO mode is enabled.</description>
+		<state pattern="%d %unit%" readOnly="true"/>
 	</channel-type>
 </thing:thing-descriptions>

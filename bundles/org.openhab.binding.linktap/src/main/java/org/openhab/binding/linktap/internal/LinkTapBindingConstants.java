@@ -31,5 +31,22 @@ public class LinkTapBindingConstants {
     public static final ThingTypeUID THING_TYPE_BRIDGE = new ThingTypeUID(BINDING_ID, "bridge");
 
     // List of all Channel ids
-    public static final String CHANNEL_1 = "channel1";
+    public static final String CHANNEL_MODE = "mode";
+    public static final String CHANNEL_RUNNING = "running";
+    public static final String CHANNEL_ON_DURATION = "on-duration";
+    public static final String CHANNEL_ECO_MODE = "eco-mode";
+    public static final String CHANNEL_ECO_ON = "eco-on";
+    public static final String CHANNEL_ECO_OFF = "eco-off";
+    public static final String CHANNEL_AUTO_BACK = "auto-back";
+    public static final String CHANNEL_REMAINING_DURATION = "remaining-duration";
+    public static final String CHANNEL_TOTAL_TIME = "total-time";
+    public static final String CHANNEL_ECO_TOTAL = "eco-total";
+
+    // Tap Modes
+    public static final String TAP_MODE_INSTANT = "TAP_MODE_INSTANT";
+    public static final String TAP_MODE_INTERVAL = "TAP_MODE_INTERVAL";
+    public static final String TAP_MODE_ODD_EVEN = "TAP_MODE_ODD_EVEN";
+    public static final String TAP_MODE_SEVEN_DAY = "TAP_MODE_SEVEN_DAY";
+    public static final String TAP_MODE_MONTH = "TAP_MODE_MONTH";
+    public static final String TAP_MODE_UNKNOWN = "TAP_MODE_UNKNOWN";
 }
