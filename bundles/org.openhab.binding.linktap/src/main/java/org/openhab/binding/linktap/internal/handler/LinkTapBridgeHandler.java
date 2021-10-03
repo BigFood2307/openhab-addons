@@ -37,8 +37,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 /**
- * The {@link LinkTapBridgeHandler} is responsible for handling commands, which are
- * sent to one of the channels.
+ * The {@link LinkTapBridgeHandler} is responsible for initalizing the Bridge and giving necessary information to the
+ * Things for API calls.
  *
  * @author Lukas Pindl - Initial contribution
  */
@@ -104,17 +104,6 @@ public class LinkTapBridgeHandler extends BaseBridgeHandler {
                 updateStatus(ThingStatus.OFFLINE);
             }
         });
-
-        // These logging types should be primarily used by bindings
-        // logger.trace("Example trace message");
-        // logger.debug("Example debug message");
-        // logger.warn("Example warn message");
-
-        // Note: When initialization can NOT be done set the status with more details for further
-        // analysis. See also class ThingStatusDetail for all available status details.
-        // Add a description to give user information to understand why thing does not work as expected. E.g.
-        // updateStatus(ThingStatus.OFFLINE, ThingStatusDetail.CONFIGURATION_ERROR,
-        // "Can not access device as username and/or password are invalid");
     }
 
     public JsonObject getAuthObject() {

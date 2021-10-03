@@ -38,8 +38,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 /**
- * The {@link TapAPILink} is responsible for handling commands, which are
- * sent to one of the channels.
+ * The {@link TapAPILink} is responsible for communication with the LinkTap API. It also makes sure, API Rate Limits are
+ * not reached.
  *
  * @author Lukas Pindl - Initial contribution
  */

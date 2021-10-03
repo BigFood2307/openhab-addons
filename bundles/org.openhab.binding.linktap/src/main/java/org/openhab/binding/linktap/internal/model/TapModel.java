@@ -18,7 +18,7 @@ import static org.openhab.binding.linktap.internal.LinkTapBindingConstants.TAP_M
 import org.eclipse.jdt.annotation.NonNullByDefault;
 
 /**
- * Data model
+ * The {@link TapModel} stores data on the tap to use at a later point.
  *
  * @author Lukas Pindl - Initial contribution
  *

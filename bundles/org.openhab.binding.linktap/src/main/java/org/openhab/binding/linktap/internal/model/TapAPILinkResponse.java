@@ -15,8 +15,7 @@ package org.openhab.binding.linktap.internal.model;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 
 /**
- * The {@link TapAPILinkResponse} is responsible for handling commands, which are
- * sent to one of the channels.
+ * is a Container for information received and forwarded during API Calls.
  *
  * @author Lukas Pindl - Initial contribution
  */
