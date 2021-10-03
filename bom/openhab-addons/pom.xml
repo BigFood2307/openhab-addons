@@ -740,6 +740,11 @@
       <groupId>org.openhab.addons.bundles</groupId>
       <artifactId>org.openhab.binding.lifx</artifactId>
       <version>${project.version}</version>
+    </dependency>	
+    <dependency>
+      <groupId>org.openhab.addons.bundles</groupId>
+      <artifactId>org.openhab.binding.linktap</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <!-- linky binding suppressed from the distribution until it is fixed
       <dependency>

@@ -11,7 +11,7 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 
-package org.openhab.binding.linktap.internal;
+package org.openhab.binding.linktap.internal.model;
 
 import static org.openhab.binding.linktap.internal.LinkTapBindingConstants.TAP_MODE_UNKNOWN;
 
@@ -20,7 +20,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 /**
  * Data model
  *
- * @author Jonas Brüstel - Initial contribution
+ * @author Lukas Pindl - Initial contribution
  *
  */
 @NonNullByDefault

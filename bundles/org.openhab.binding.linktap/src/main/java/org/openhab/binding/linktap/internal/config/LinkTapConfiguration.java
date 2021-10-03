@@ -10,19 +10,23 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-package org.openhab.binding.linktap.internal;
+package org.openhab.binding.linktap.internal.config;
+
+import org.eclipse.jdt.annotation.NonNullByDefault;
 
 /**
  * The {@link LinkTapConfiguration} class contains fields mapping thing configuration parameters.
  *
  * @author Lukas Pindl - Initial contribution
  */
+
+@NonNullByDefault
 public class LinkTapConfiguration {
 
     /**
      * Sample configuration parameters. Replace with your own.
      */
-    public String tapId;
-    public String gatewayId;
-    public int refreshInterval;
+    public String tapId = "";
+    public String gatewayId = "";
+    public int refreshInterval = 30;
 }

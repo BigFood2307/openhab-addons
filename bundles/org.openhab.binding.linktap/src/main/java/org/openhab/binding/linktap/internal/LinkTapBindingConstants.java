@@ -49,4 +49,18 @@ public class LinkTapBindingConstants {
     public static final String TAP_MODE_SEVEN_DAY = "TAP_MODE_SEVEN_DAY";
     public static final String TAP_MODE_MONTH = "TAP_MODE_MONTH";
     public static final String TAP_MODE_UNKNOWN = "TAP_MODE_UNKNOWN";
+
+    // URIs
+
+    public static final String URI_GET_ALL_DEVICES = "https://www.link-tap.com/api/getAllDevices";
+    public static final String URI_GET_WATERING_STATUS = "https://www.link-tap.com/api/getWateringStatus";
+    public static final String URI_ACTIVATE_INSTANT = "https://www.link-tap.com/api/activateInstantMode";
+    public static final String URI_ACTIVATE_INTERVAL = "https://www.link-tap.com/api/activateIntervalMode";
+    public static final String URI_ACTIVATE_ODD_EVEN = "https://www.link-tap.com/api/activateOddEvenMode";
+    public static final String URI_ACTIVATE_SEVEN_DAY = "https://www.link-tap.com/api/activateSevenDayMode";
+    public static final String URI_ACTIVATE_MONTH = "https://www.link-tap.com/api/activateMonthMode";
+
+    // Timing
+
+    public static final int SECONDS_BETWEEN_MODE_HANDLING = 10;
 }

@@ -10,18 +10,22 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-package org.openhab.binding.linktap.internal;
+package org.openhab.binding.linktap.internal.config;
+
+import org.eclipse.jdt.annotation.NonNullByDefault;
 
 /**
  * The {@link LinkTapBridgeConfiguration} class contains fields mapping thing configuration parameters.
  *
  * @author Lukas Pindl - Initial contribution
  */
+
+@NonNullByDefault
 public class LinkTapBridgeConfiguration {
 
     /**
      * Sample configuration parameters. Replace with your own.
      */
-    public String username;
-    public String apikey;
+    public String username = "";
+    public String apikey = "";
 }

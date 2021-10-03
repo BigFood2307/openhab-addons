@@ -10,18 +10,20 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-package org.openhab.binding.linktap.internal;
+package org.openhab.binding.linktap.internal.handler;
+
+import static org.openhab.binding.linktap.internal.LinkTapBindingConstants.URI_GET_ALL_DEVICES;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.api.ContentResponse;
 import org.eclipse.jetty.client.api.Request;
 import org.eclipse.jetty.client.util.StringContentProvider;
 import org.eclipse.jetty.http.HttpMethod;
+import org.openhab.binding.linktap.internal.config.LinkTapBridgeConfiguration;
 import org.openhab.core.thing.Bridge;
 import org.openhab.core.thing.ChannelUID;
 import org.openhab.core.thing.ThingStatus;
@@ -46,8 +48,6 @@ public class LinkTapBridgeHandler extends BaseBridgeHandler {
     private final Logger logger = LoggerFactory.getLogger(LinkTapBridgeHandler.class);
     private final HttpClient httpClient;
 
-    private @Nullable LinkTapBridgeConfiguration config;
-
     public LinkTapBridgeHandler(Bridge thing, HttpClient httpClient) {
         super(thing);
         this.httpClient = httpClient;
@@ -67,8 +67,7 @@ public class LinkTapBridgeHandler extends BaseBridgeHandler {
         scheduler.execute(() -> {
             boolean thingReachable = false; // <background task with long running initialization here>
             // when done do:
-            Request httpReq = httpClient.newRequest("https://www.link-tap.com/api/getAllDevices")
-                    .method(HttpMethod.POST);
+            Request httpReq = httpClient.newRequest(URI_GET_ALL_DEVICES).method(HttpMethod.POST);
 
             JsonObject dataObject = getAuthObject();
             String requestBodyPayload = dataObject.toString();
@@ -86,7 +85,7 @@ public class LinkTapBridgeHandler extends BaseBridgeHandler {
                 logger.warn("Http Error");
             }
 
-            if (responseBody.equals("")) {
+            if ("".equals(responseBody)) {
                 // No additional action for now
             } else {
                 JsonObject responseObject = JsonParser.parseString(responseBody).getAsJsonObject();
@@ -119,7 +118,7 @@ public class LinkTapBridgeHandler extends BaseBridgeHandler {
     }
 
     public JsonObject getAuthObject() {
-        config = getConfigAs(LinkTapBridgeConfiguration.class);
+        LinkTapBridgeConfiguration config = getConfigAs(LinkTapBridgeConfiguration.class);
         JsonObject dataObject = new JsonObject();
         dataObject.addProperty("username", config.username);
         dataObject.addProperty("apiKey", config.apikey);

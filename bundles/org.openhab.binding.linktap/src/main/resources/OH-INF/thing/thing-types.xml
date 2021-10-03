@@ -51,9 +51,9 @@
 				<label>Gateway ID</label>
 				<description>The device ID for the Gateway, which the Tap is connected to</description>
 			</parameter>
-			<parameter name="refreshInterval" type="integer" unit="s" min="1">
+			<parameter name="refreshInterval" type="integer" unit="s" min="30">
 				<label>Refresh Interval</label>
-				<description>Interval the device is polled in sec.</description>
+				<description>Interval the device is polled at in seconds. Also used for limiting Mode Changes</description>
 			</parameter>
 		</config-description>
 	</thing-type>
@@ -72,18 +72,21 @@
 				<option value="TAP_MODE_MONTH">Month</option>
 			</options>
 		</state>
+		<autoUpdatePolicy>veto</autoUpdatePolicy>
 	</channel-type>
 	<channel-type id="tap-running">
 		<item-type>Switch</item-type>
 		<label>Running</label>
 		<description>Determines if the TapLink Device is active. On may also mean the device is in a special mode waiting to
 			turn on automatically.</description>
+		<autoUpdatePolicy>veto</autoUpdatePolicy>
 	</channel-type>
 	<channel-type id="tap-on-duration">
 		<item-type>Number:Time</item-type>
 		<label>On Duration</label>
 		<description>The set duration for Instant Mode.</description>
 		<state pattern="%d %unit%" step="1" min="1"/>
+		<autoUpdatePolicy>veto</autoUpdatePolicy>
 	</channel-type>
 	<channel-type id="tap-eco-mode">
 		<item-type>Switch</item-type>
